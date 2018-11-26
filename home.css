@@ -1,0 +1,25 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 15%;
+  background-color: lightblue;
+  height: 100%;
+  position: fixed;
+  overflow: auto;
+  text-align: center;
+}
+
+a{
+  text-decoration: none;
+  border: 1px solid black;
+  padding: 10px;
+  margin-left: 10px;
+}
+a:hover {
+  background-color: white;
+}
+li{
+  margin-top: 20px;
+  height:50px;
+}
