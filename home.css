@@ -23,3 +23,46 @@ li{
   margin-top: 20px;
   height:50px;
 }
+
+div.post{
+	margin:1%;
+	margin-left:16%;
+	border: 3px solid darkblue;
+	background-color:#dbe8ff;
+	margin-right: 1% !important;
+}
+
+div.postheader{
+	text-align: left !important;
+	background-color:#a3b3d1;
+	margin-right: 0px !important;
+	padding:5px;
+}
+
+span.poster{
+	color: darkblue;
+	font-weight:bold;
+}
+
+div.postcontent{
+	text-align: left !important;
+	margin-right: 0px !important;
+	padding:5px;
+}
+
+div.postlikes{
+	text-align: left !important;
+	margin-right: 0px !important;
+	padding:5px;
+}
+
+button.likebutton{
+	background-color:#dbe8ff;
+	color:darkblue;
+	border: 1px solid black;
+	padding:10px;
+}
+
+button.likebutton:hover{
+	background-color:white;
+}
