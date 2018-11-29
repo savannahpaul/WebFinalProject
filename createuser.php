@@ -165,9 +165,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 <input type="submit" name="submit" value="Submit"> 
             </form>
+            
         </div>
-    
-    <br><br>
+        <br><br>
+        <a href="login.php"> Login </a>
+        <br>
     </div>
       
     <footer>
