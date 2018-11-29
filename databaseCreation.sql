@@ -1,5 +1,5 @@
-DROP TABLE users;
-DROP TABLE posts;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS posts;
 
 CREATE TABLE users(
 	username varchar(255),
