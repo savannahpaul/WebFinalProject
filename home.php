@@ -14,20 +14,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 ?>
 
-<script>
-  function clic(element){
-    var x = document.getElementById("postcontent");
-    var y = document.getElementById("postlocation");
-    var append = "<div class='post'><div class='postheader'><span class='poster'>Username</span> - 11/28/18 - Post #1 - Likes: 0</div><div class='postcontent'>" + x.value +"</div><div class='postlikes'><button class='likebutton' value='1'>&#128077; Like</button></div></div>";
-    y.innerHTML += append;
-  }
-</script>
-
 <!DOCTYPE html>
 <html lang = "en-US">
   <head>
     <link rel="stylesheet" type="text/css" href="global.css">
     <link rel="stylesheet" type="text/css" href="home.css">
+	<script src="home.js"></script>
     <meta charset = "UTF-8">
   </head>
   <body>
