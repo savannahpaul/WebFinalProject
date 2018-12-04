@@ -2,15 +2,22 @@
 $contentErr = "";
 $content = "";
 
+session_start();
+
+//do not allow people to access home.php if they are not logged in
+if($_SESSION["uname"] == ""){
+	header("Location: login.php");
+}
+
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     //Connect to server
     $servername = "localhost";
-    $dbusername = "qwinter";
-    $dbpassword = "EMGAYIIS";
-    $dbname = "f18_qwinter";
+	$dbusername = "qwinter";
+	$dbpassword = "EMGAYIIS";
+	$dbname = "f18_qwinter";
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
-    $content = $_POST["content"];
+    //$content = $_POST["content"];
   }
 ?>
 
@@ -28,9 +35,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     </header>
       <div id="nav">
         <ul>
-          <li><a href="">My Page</a></li>
-          <li><a href="">My Feed</a></li>
-          <li><a href="">Settings</a></li>
+          <li><a href="profile.php">My Page</a></li>
+          <li><a href="settings.php">Settings</a></li>
+		  <li><a href="logout.php">Logout</a></li>
         </ul>
       </div>
       <div id="postheader">

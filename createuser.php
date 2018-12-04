@@ -2,12 +2,19 @@
 $fnameErr = $lnameErr = $userErr = $emailErr = $passErr = "";
 $fname = $lname = $uname = $email = $pass = "";
 
+session_start();
+
+//go back to home if you try to go to login page when youre already logged in
+if($_SESSION["uname"] != ""){
+	header("Location: home.php");
+}
+
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     //Connect to server
     $servername = "localhost";
-    $dbusername = "qwinter";
-    $dbpassword = "EMGAYIIS";
-    $dbname = "f18_qwinter";
+	$dbusername = "qwinter";
+	$dbpassword = "EMGAYIIS";
+	$dbname = "f18_qwinter";
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
     
     //Check fname
@@ -104,7 +111,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $cstmt->close();
         
         //Go to Homepage        
-        include 'home.html';
+		$_SESSION["uname"] = $_POST["uname"];
+		header("Location: home.php");
+		//include 'home.html';
         exit;
     }
 }
