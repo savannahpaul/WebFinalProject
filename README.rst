@@ -1,16 +1,17 @@
 Leftover Tasks
 -------------------------------------
 
-1. Be able to reset password outside of the wall (send email)
+1. Reset password outside of wall (email)
 
-2. Creating a post will update the database and display (enter data)
+2. Create post sends to database
 
-3. Search posts by username (select data)
+3. Delete/edit posts
 
-4. Be able to delete a post (delete data)
+4. Update account info and password inside of wall (settings.php)
 
-5. Update account information and password (update data)
+5. Cookie: keep track of last page visited and timeout
 
-6. Log out
+6. Be able to view other people's profiles (profile.php?user=...)
 
-7. Cookie related things: redirect to login page (if not logged or timed out) 
+7. Likes
+

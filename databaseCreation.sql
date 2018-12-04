@@ -8,6 +8,7 @@ CREATE TABLE users(
 	lname varchar(255),
 	email varchar(255),
 	bio varchar(4096),
+	likes varchar(2048),
 	PRIMARY KEY(username)
 );
 
