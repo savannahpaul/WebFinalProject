@@ -1,5 +1,5 @@
 <?php
-$email = "";
+$email = $returnLogin = "";
 $emailErr = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -35,13 +35,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     if($emailErr == "") {
-        //Send email
+        //Generate a random 6 digit password
+        $tempPass = rand(100000, 999999);
         
-        $emailErr = "<p>An email has been sent to {$email} to change your password.</p>";
+        $message = "Your temporary password is {$tempPass}.";
         
-        $message = "Change your password.";
+        $passQuery = "UPDATE users SET password = ? WHERE email = ?";
+        $pstmt = $conn->prepare($passQuery);
+        $pstmt->bind_param("ss", $tempPass, $email);
+        $pstmt->execute();
+        $pstmt->close();
         
         mail($email, 'Social Network Password Reset', $message);
+        
+        $emailErr = "<p>An email has been sent to {$email} to change your password.</p>";
+        $returnLogin = "<p>Return to the <a href='login.php'>login page</a></p>";
     }
 }
 ?>
@@ -67,6 +75,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label>Email:</label> <input type="text" name="email" value="<?php echo $email;?>">
                     <br>
                     <span class="error"><?php echo $emailErr;?></span>
+                    <span><?php echo $returnLogin;?></span>
                     <br>
                     
                     <input type="submit" name="submit" value="Submit">
