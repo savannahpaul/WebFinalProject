@@ -1,6 +1,5 @@
 <?php
 $contentErr = "";
-$content = "";
 
 session_start();
 
@@ -12,12 +11,22 @@ if($_SESSION["uname"] == ""){
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     //Connect to server
     $servername = "localhost";
-	$dbusername = "qwinter";
-	$dbpassword = "EMGAYIIS";
-	$dbname = "f18_qwinter";
+		$dbusername = "qwinter";
+		$dbpassword = "EMGAYIIS";
+		$dbname = "f18_qwinter";
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
-    //$content = $_POST["content"];
+		//Add a post to the database everytime the user clicks submit
+		$username = $_SESSION["uname"];
+		$content = $_POST["content"];
+		$time = date("h:i:s");
+
+		$stmt = $conn->prepare("INSERT INTO posts (username, content, likes, time) VALUES (?, ?, ?, ?)");
+		$stmt->bind_param("ssii", $username, $content, 0, $time);
+
+		$stmt->execute();
+		$stmt->close();
+		$conn->close();
   }
 ?>
 
@@ -42,10 +51,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
       <div id="postheader">
       <br>
-      <div>
+      <form method="POST">
         <input class="draft" id="postcontent" type="text" name="content" value="Create a post...">
-        <input type="submit" onClick="clic(this);" value="Submit">
-      </div>
+        <input type="submit" value="Submit">
+      </form>
     </div>
 	  <div id="postlocation"></div>
     </body>
