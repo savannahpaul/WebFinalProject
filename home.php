@@ -60,7 +60,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 	<div id="postcheck"></div>
 	<div id="postlocation"></div>
-    </body>
     <footer>
       I am an empty footer
     </footer>

@@ -70,7 +70,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <header>
       <h1> Social Network </h1>
     </header>
+
 	<br><br>
+
     <div id="loginbox">
     <h2>Login</h2>
     <div id="form">
@@ -86,14 +88,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <span class="error"><?php echo $loginErr;?></span>
         <br>
         
-      <input type="submit" name="submit" value="Submit"> 
+        <input type="submit" name="submit" value="Submit"> 
     </form>
     </div>
     <br>
     
     <br><br>
     <a href="createuser.php"> Create an Account </a><br>
-    <a href="createuser.php"> Reset Password </a>
+    <a href="resetPassword.php"> Reset Password </a>
     </div>
   </body>
   <footer>
