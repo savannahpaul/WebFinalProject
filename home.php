@@ -10,19 +10,20 @@ if($_SESSION["uname"] == ""){
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     //Connect to server
-    $servername = "localhost";
-		$dbusername = "qwinter";
-		$dbpassword = "EMGAYIIS";
-		$dbname = "f18_qwinter";
+	$servername = "localhost";
+	$dbusername = "qwinter";
+	$dbpassword = "EMGAYIIS";
+	$dbname = "f18_qwinter";
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
 		//Add a post to the database everytime the user clicks submit
 		$username = $_SESSION["uname"];
 		$content = $_POST["content"];
-		$time = date("h:i:s");
+		$time = time();
+		$zerovar = 0;
 
 		$stmt = $conn->prepare("INSERT INTO posts (username, content, likes, time) VALUES (?, ?, ?, ?)");
-		$stmt->bind_param("ssii", $username, $content, 0, $time);
+		$stmt->bind_param("ssii", $username, $content, $zerovar, $time);
 
 		$stmt->execute();
 		$stmt->close();
@@ -35,11 +36,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   <head>
     <link rel="stylesheet" type="text/css" href="global.css">
     <link rel="stylesheet" type="text/css" href="home.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="home.js"></script>
     <meta charset = "UTF-8">
   </head>
   <body>
-    <header>
+    <header id="hdr">
       <h1>Social Network</h1>
     </header>
       <div id="nav">
@@ -49,14 +51,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		  <li><a href="logout.php">Logout</a></li>
         </ul>
       </div>
-      <div id="postheader">
+      <div id="postcreate">
       <br>
       <form method="POST">
         <input class="draft" id="postcontent" type="text" name="content" value="Create a post...">
         <input type="submit" value="Submit">
       </form>
     </div>
-	  <div id="postlocation"></div>
+	<div id="postcheck"></div>
+	<div id="postlocation"></div>
     <footer>
       I am an empty footer
     </footer>
