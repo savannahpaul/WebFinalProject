@@ -1,13 +1,27 @@
-setInterval(getposts, 1000);
+window.onload = function(){
+	getposts();
+	setInterval(checkNew, 5000);
+}
 
 function getposts(){
 	dbreq = new XMLHttpRequest();
 	dbreq.onreadystatechange=function(){
 		document.getElementById("postlocation").innerHTML=this.responseText;
+		document.getElementById("postcheck").innerHTML="";
 	}
 	dbreq.open("GET", "getposts.php", true);
 	dbreq.send();
-	console.log("got posts");
+}
+
+function checkNew(){
+	dbreq = new XMLHttpRequest();
+	dbreq.onreadystatechange=function(){
+		if(this.responseText != 0){
+			document.getElementById("postcheck").innerHTML=this.responseText+" new posts. <button class='like' onClick='getposts()'>Show?</button>";
+		}
+	}
+	dbreq.open("GET", "newposts.php", true);
+	dbreq.send();
 }
 
 function clic(element){

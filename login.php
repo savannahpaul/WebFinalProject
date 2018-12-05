@@ -11,7 +11,7 @@ if($_SESSION["uname"] != ""){
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     //Connect to server
-    $servername = "localhost";
+	$servername = "localhost";
 	$dbusername = "qwinter";
 	$dbpassword = "EMGAYIIS";
 	$dbname = "f18_qwinter";
@@ -70,6 +70,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <header>
       <h1> Social Network </h1>
     </header>
+	<br><br>
     <div id="loginbox">
     <h2>Login</h2>
     <div id="form">

@@ -24,12 +24,9 @@
 	$postQuery = "SELECT * FROM posts ORDER BY id DESC";
 	$postResult = $conn->query($postQuery);
 	if($postResult->num_rows == 0){
-		echo "There are no posts to display.";
+		echo 0;
 		exit;
 	}
-	$_SESSION["postsDisplayed"] = $postResult->num_rows;
-	while($row = $postResult->fetch_assoc()){
-		echo "<div class='post'><div class='postheader'><span class='poster'>" . $row["username"] . "</span> - " . date("m/d/Y H:i:s", $row["time"]) . " - Post #" . $row["id"] . " - Likes: " . $row["likes"] . "</div><div class='postcontent'>" . $row["content"] . "</div><div class='postlikes'><button class='like' onClick='updateLike()' value='" . $row["id"] . "'>&#128077; Like</button></div></div>";
-	}
+	echo $postResult->num_rows - $_SESSION["postsDisplayed"];
 	$conn->close();
 ?>

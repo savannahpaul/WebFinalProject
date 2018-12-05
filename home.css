@@ -56,13 +56,27 @@ div.postlikes{
 	padding:5px;
 }
 
-button.likebutton{
+button.like{
 	background-color:#dbe8ff;
 	color:darkblue;
 	border: 1px solid black;
 	padding:10px;
 }
 
-button.likebutton:hover{
+button.like:hover{
 	background-color:white;
+}
+
+#postcreate{
+	margin-top:75px;
+}
+
+#postcheck{
+	text-align: center !important;
+	margin-left:16% !important;
+	padding:1em;
+}
+
+#postlocation{
+	margin-bottom: 30px;
 }
