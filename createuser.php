@@ -84,7 +84,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $estmt->close();
 
             if($numEmail > 0) {
-                $userErr = "That email is already being used.";
+                $emailErr = "That email is already being used.";
             }
         }
     }
@@ -96,7 +96,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     else {
         $pass = $_POST["password"];
         if(!preg_match("/^[a-zA-Z0-9]*$/", $uname)) {
-            $lnameErr = "Only letters and numbers allowed.";
+            $passErr = "Only letters and numbers allowed.";
         }
     }
     
