@@ -9,6 +9,8 @@ CREATE TABLE users(
 	email varchar(255),
 	bio varchar(4096),
 	likes varchar(2048),
+    activated int,
+    activecode varchar(255),
 	PRIMARY KEY(username)
 );
 

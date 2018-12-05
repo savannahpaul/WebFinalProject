@@ -15,6 +15,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$dbpassword = "EMGAYIIS";
 	$dbname = "f18_qwinter";
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+    if($conn ->connect_error){
+		die("Cannot connect to database");
+	}
 
 		//Add a post to the database everytime the user clicks submit
 		$username = $_SESSION["uname"];
@@ -47,6 +50,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
       <div id="nav">
         <ul>
           <li><a href="profile.php">My Page</a></li>
+          <li><a href="activate.php">Activate</a></li>
           <li><a href="settings.php">Settings</a></li>
 		  <li><a href="logout.php">Logout</a></li>
         </ul>
@@ -61,7 +65,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	<div id="postcheck"></div>
 	<div id="postlocation"></div>
     <footer>
-      I am an empty footer
+      
     </footer>
     </body>
 </html>

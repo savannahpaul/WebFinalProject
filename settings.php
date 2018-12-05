@@ -9,6 +9,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$dbpassword = "EMGAYIIS";
 	$dbname = "f18_qwinter";
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+    if($conn ->connect_error){
+		die("Cannot connect to database");
+	}
+    
     
     if(empty($_POST["email"])) {
         $emailErr = "Email is required.";

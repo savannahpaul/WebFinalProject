@@ -16,6 +16,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$dbpassword = "EMGAYIIS";
 	$dbname = "f18_qwinter";
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+    if($conn ->connect_error){
+		die("Cannot connect to database");
+	}
     
     //Check fname
     if(empty($_POST["firstname"])) {
@@ -103,12 +106,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     
     //No errors, go to homepage
     if($fnameErr == "" && $lnameErr == "" && $userErr == "" && $emailErr == "" && $passErr == "") {
+        $activationCode = rand(1000, 9999);
+        $zeroVar = 0;
         //Add user to database
-        $createQuery = "INSERT INTO users (username, password, fname, lname, email) VALUES (?, ?, ?, ?, ?)";
+        $createQuery = "INSERT INTO users (username, password, fname, lname, email, activated, activecode) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $cstmt = $conn->prepare($createQuery);
-        $cstmt->bind_param("sssss", $uname, $pass, $fname, $lname, $email);
+        $cstmt->bind_param("sssssii", $uname, $pass, $fname, $lname, $email, $zeroVar, $activationCode);
         $cstmt->execute();
         $cstmt->close();
+        
+        //Send an activation code to the user
+        $msg = "Your activation code is: {$activationCode}.";
+        mail($email, 'Activation Code', $msg);
         
         //Go to Homepage        
 		$_SESSION["uname"] = $_POST["uname"];
@@ -182,7 +191,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
       
     <footer>
-      I am an empty footer
     </footer>
     
   </body>
