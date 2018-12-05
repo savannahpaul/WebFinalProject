@@ -19,18 +19,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		die("Cannot connect to database");
 	}
 
-		//Add a post to the database everytime the user clicks submit
-		$username = $_SESSION["uname"];
-		$content = $_POST["content"];
-		$time = time();
-		$zerovar = 0;
+    //Add a post to the database everytime the user clicks submit
+    $username = $_SESSION["uname"];
+    $content = $_POST["content"];
+    $time = time();
+    $zerovar = 0;
 
-		$stmt = $conn->prepare("INSERT INTO posts (username, content, likes, time) VALUES (?, ?, ?, ?)");
-		$stmt->bind_param("ssii", $username, $content, $zerovar, $time);
+    //Check if account has been activated, and don't allow 
+    // user to post if it has not been activated
+    $astmt = $conn->prepare("SELECT activated FROM users WHERE username = ?");
+    $astmt->bind_param("s", $username);
+    $astmt->execute();
+    $astmt->bind_result($act);
+    $astmt->fetch();
+    $astmt->close();
+    
+    //Create post
+    if($act >= 1) {
+        $stmt = $conn->prepare("INSERT INTO posts (username, content, likes, time) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssii", $username, $content, $zerovar, $time);
 
-		$stmt->execute();
-		$stmt->close();
-		$conn->close();
+        $stmt->execute();
+        $stmt->close();
+        $conn->close();
+    }
+    else {
+        echo "<script type='text/javascript'>alert('Account must be activated in order to post');</script>";
+    }
+
+    
   }
 ?>
 
