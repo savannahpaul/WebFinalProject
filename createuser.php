@@ -46,7 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     else {
         $uname = $_POST["uname"];
         if(!preg_match("/^[a-zA-Z ']*$/", $uname)) {
-            $lnameErr = "Only letters, spaces, and apostrophes allowed.";
+            $userErr = "Only letters, spaces, and apostrophes allowed.";
         }
         else {
             //Check if username exists in database using prepared statement
@@ -95,7 +95,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     else {
         $pass = $_POST["password"];
-        if(!preg_match("/^[a-zA-Z0-9]*$/", $uname)) {
+        if(!preg_match("/^[a-zA-Z0-9]*$/", $pass)) {
             $passErr = "Only letters and numbers allowed.";
         }
     }

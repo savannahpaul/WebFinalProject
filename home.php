@@ -57,7 +57,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
       </form>
     </div>
 	  <div id="postlocation"></div>
-    </body>
     <footer>
       I am an empty footer
     </footer>
