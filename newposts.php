@@ -2,7 +2,7 @@
 	session_start();
 
 	//do not allow people to steal our post data if they are not logged in
-	if($_SESSION["uname"] == ""){
+	if(isset($_SESSION["uname"]) && $_SESSION["uname"] == ""){
 		exit;
 	}
 

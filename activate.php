@@ -3,24 +3,25 @@ $code = $active = "";
 $codeErr = "";
 
 session_start();
-if($_SESSION["uname"] == ""){
+if(isset($_SESSION["uname"]) && $_SESSION["uname"] == ""){
 	header("Location: login.php");
 }
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     //Connect to server
-	$servername = "localhost";
-	$dbusername = "qwinter";
-	$dbpassword = "EMGAYIIS";
-	$dbname = "f18_qwinter";
+		$servername = "localhost";
+	  $dbusername = "qwinter";
+	  $dbpassword = "EMGAYIIS";
+	  $dbname = "f18_qwinter";
+
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
     if($conn ->connect_error){
 		die("Cannot connect to database");
 	}
-    
+
     //Get username
     $username = $_SESSION["uname"];
-    
+
     //Check is account is active
     $astmt = $conn->prepare("SELECT activated FROM users WHERE username = ?");
     $astmt->bind_param("s", $username);
@@ -28,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $astmt->bind_result($act);
     $astmt->fetch();
     $astmt->close();
-    
+
     if($act >= 1) {
         $active = "Account has already been activated.";
     }
@@ -77,37 +78,37 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="global.css">
   </head>
-    
+
   <body>
     <header>
       <h1> Social Network </h1>
     </header>
-      
+
     <br><br>
-    
+
     <div id="loginbox">
     <h2>Activate your Account</h2>
         <div id="form">
             <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                 <label>Activation Code:</label> <input type="text" name="code" value="<?php echo $code;?>">
-                
+
                 <br>
                 <span class="error"><?php echo $codeErr;?></span>
                 <br>
                 <span><?php echo $active;?></span>
                 <br><br>
-                
-                <input type="submit" name="submit" value="Submit"> 
+
+                <input type="submit" name="submit" value="Submit">
             </form>
-            
+
         </div>
         <br><br>
         <a href="home.php"> Home </a>
         <br>
     </div>
-      
+
     <footer>
     </footer>
-    
+
   </body>
 </html>

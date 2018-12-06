@@ -2,7 +2,7 @@
 	session_start();
 
 	//do not allow people to steal our post data if they are not logged in
-	if($_SESSION["uname"] == ""){
+	if(isset($_SESSION["uname"]) && $_SESSION["uname"] == ""){
 		exit;
 	}
 
@@ -13,6 +13,7 @@
 	$dbusername = "qwinter";
 	$dbpassword = "EMGAYIIS";
 	$dbname = "f18_qwinter";
+
 	//*****************************************************************************
 	//EDIT THIS WHEN GRADING TO PROPERLY ACCESS YOUR DATABASE
 	//*****************************************************************************
@@ -29,7 +30,7 @@
 	}
 	$_SESSION["postsDisplayed"] = $postResult->num_rows;
 	while($row = $postResult->fetch_assoc()){
-		echo "<div class='post'><div class='postheader'><span class='poster'>" . $row["username"] . "</span> - " . date("m/d/Y H:i:s", $row["time"]) . " - Post #" . $row["id"] . " - Likes: " . $row["likes"] . "</div><div class='postcontent'>" . $row["content"] . "</div><div class='postlikes'><button class='like' onClick='updateLike()' value='" . $row["id"] . "'>&#128077; Like</button></div></div>";
+		echo "<div class='post'><div class='postheader'><span class='poster'>" . $row["username"] . "</span> - " . date("m/d/Y H:i:s", $row["time"]) . " - Post #" . $row["id"] . " - Likes: " . $row["likes"] . "<button id='like' class='like' onClick='deletePost()' value='".$row["id"]."' style='float:right;'> [Delete] </button></div><div class='postcontent'>" . $row["content"] . "</div><div class='postlikes'><button class='like' onClick='updateLike()' value='" . $row["id"] . "'>&#128077; Like</button></div></div>";
 	}
 	$conn->close();
 ?>

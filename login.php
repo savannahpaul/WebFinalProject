@@ -10,16 +10,18 @@ if($_SESSION["uname"] != ""){
 }
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-    //Connect to server
-	$servername = "localhost";
-	$dbusername = "qwinter";
-	$dbpassword = "EMGAYIIS";
-	$dbname = "f18_qwinter";
+    Connect to server
+		Connect to server
+		$servername = "localhost";
+		$dbusername = "qwinter";
+		$dbpassword = "EMGAYIIS";
+		$dbname = "f18_qwinter";
+
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
     if($conn ->connect_error){
 		die("Cannot connect to database");
 	}
-    
+
     //Check for username
     if(empty($_POST["uname"])) {
         $userErr = "Username is required";
@@ -34,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     else {
         $pass = $_POST["password"];
     }
-    
+
     //Check is user exists
     if($userErr == "" && $passErr == "") {
         $loginQuery = "SELECT COUNT(*) FROM users WHERE username = ? AND password = ?";
@@ -44,7 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $lstmt->bind_result($isUser);
         $lstmt->fetch();
         $lstmt->close();
-        
+
         if($isUser <= 0) {
             $loginErr = "Invalid username or password.";
         }
@@ -55,10 +57,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 			header("Location: home.php");
             exit;
         }
-            
+
     }
-    
-    
+
+
 }
 
 ?>
@@ -84,18 +86,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <br>
         <span class="error"><?php echo $userErr;?></span>
         <br>
-        
+
         <label>Password:</label> <input type="password" name="password" value="<?php echo $pass;?>">
         <br>
         <span class="error"><?php echo $passErr;?></span>
         <span class="error"><?php echo $loginErr;?></span>
         <br>
-        
-        <input type="submit" name="submit" value="Submit"> 
+
+        <input type="submit" name="submit" value="Submit">
     </form>
     </div>
     <br>
-    
+
     <br><br>
     <a href="createuser.php"> Create an Account </a><br>
     <a href="resetPassword.php"> Reset Password </a>
