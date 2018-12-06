@@ -70,13 +70,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
       <div id="profileDiv">
         <br>
-      </div>
+      
       <div style="text-align:center;" id="search">
       <form method="POST">
         <input name="name" style="width:80%" type="text" placeholder="Search users...">
         <input type="submit" value="Submit">
       </form>
       </div>
+    </div>
 
     <footer>
 

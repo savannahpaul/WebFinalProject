@@ -67,8 +67,12 @@ button.like:hover{
 	background-color:white;
 }
 
-#postcreate{
+#postcreate, #profileDiv{ 
 	margin-top:75px;
+}
+
+#profileDiv {
+    margin-left: 20%;
 }
 
 #postcheck{
