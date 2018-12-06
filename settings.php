@@ -5,15 +5,16 @@ $emailErr = $oldPassErr = $newPassErr = "";
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     //Connect to server
     $servername = "localhost";
-	$dbusername = "qwinter";
-	$dbpassword = "EMGAYIIS";
-	$dbname = "f18_qwinter";
+    $dbusername = "qwinter";
+    $dbpassword = "EMGAYIIS";
+    $dbname = "f18_qwinter";
+
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
     if($conn ->connect_error){
 		die("Cannot connect to database");
 	}
-    
-    
+
+
     if(empty($_POST["email"])) {
         $emailErr = "Email is required.";
     }
@@ -31,13 +32,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $estmt->bind_result($numEmail);
             $estmt->fetch();
             $estmt->close();
-            
+
             if($numEmail <= 0) {
                 $emailErr = "Invalid email.";
             }
         }
     }
-    
+
     //Check old password
     if(empty($_POST["password"])) {
         $oldPassErr = "Password is required.";
@@ -48,7 +49,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $oldPassErr = "Only letters and numbers allowed.";
         }
     }
-    
+
     //Check new password
     if(empty($_POST["newPassword"])) {
         $newPassErr = "Password is required.";
@@ -59,7 +60,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $newPassErr = "Only letters and numbers allowed.";
         }
     }
-    
+
     //Check current email and password
     if($emailErr == "" && $oldPassErr == "" && $newPassErr == "") {
         $checkQuery = "SELECT COUNT(*) FROM users WHERE email = ? AND password = ?";
@@ -69,7 +70,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $cstmt->bind_result($validEmailPass);
         $cstmt->fetch();
         $cstmt->close();
-        
+
         if($validEmailPass != 1) {
             $emailErr = $oldPassErr = "Invalid email or password.";
         }
@@ -84,7 +85,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $backToHome = "<p>Go to <a href='home.php'>home page</a></p>";
         }
     }
-    
+
 }
 ?>
 
@@ -94,14 +95,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="global.css">
     </head>
-    
+
     <body>
         <header>
             <h1> Social Network </h1>
         </header>
-        
+
         <br><br>
-        
+
         <div id="resetBox">
             <h2>Change Password</h2>
             <div id="form">
@@ -110,23 +111,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     <br>
                     <span class="error"><?php echo $emailErr;?></span>
                     <br>
-                    
+
                     <label>Current Password:</label> <input type="password" name="password" value="<?php echo $oldPass;?>">*
                     <br>
                     <span class="error"><?php echo $oldPassErr;?></span>
                     <br>
-                    
+
                     <label>New Password:</label> <input type="password" name="newPassword" value="<?php echo $newPass;?>">*
-                
+
                     <br>
                     <span class="error"><?php echo $newPassErr;?></span>
-                    
+
                     <span><?php echo $backToHome;?></span>
                     <br>
-                    
+
                     <span class="error">* Required Field</span>
                     <br><br>
-                    
+
                     <input type="submit" name="submit" value="Submit">
                 </form>
             </div>
@@ -134,11 +135,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="home.php">Home</a>
             <br>
         </div>
-        
-        
+
+
         <footer>
         </footer>
-        
+
     </body>
-    
+
 </html>

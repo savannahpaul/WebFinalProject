@@ -11,12 +11,20 @@
   $dbpassword = "EMGAYIIS";
   $dbname = "f18_qwinter";
 
+  // $servername = "localhost";
+  // $dbusername = "root";
+  // $dbpassword = "";
+  // $dbname = "test";
+
 	$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
-	$updateQuery = $conn->prepare("UPDATE posts SET likes = likes + 1 WHERE username=?");
-  $updateQuery->bind_param('s', $_SESSION["uname"]);
+  $id = $_GET['id'];
+
+	$updateQuery = $conn->prepare("DELETE FROM posts WHERE id=1");
+  $updateQuery->bind_param('i', $id);
   $updateQuery->execute();
   $updateQuery->close();
 
   $conn->close();
+
 ?>

@@ -5,21 +5,22 @@ $fname = $lname = $uname = $email = $pass = "";
 session_start();
 
 //go back to home if you try to go to login page when youre already logged in
-if($_SESSION["uname"] != ""){
+if(isset($_SESSION["uname"]) && $_SESSION["uname"] != ""){
 	header("Location: home.php");
 }
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     //Connect to server
-	$servername = "localhost";
-	$dbusername = "qwinter";
-	$dbpassword = "EMGAYIIS";
-	$dbname = "f18_qwinter";
+		$servername = "localhost";
+	  $dbusername = "qwinter";
+	  $dbpassword = "EMGAYIIS";
+	  $dbname = "f18_qwinter";
+
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
     if($conn ->connect_error){
 		die("Cannot connect to database");
 	}
-    
+
     //Check fname
     if(empty($_POST["firstname"])) {
         $fnameErr = "First Name is required.";
@@ -30,7 +31,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $fnameErr = "Only letters, spaces, and apostrophes allowed.";
         }
     }
-    
+
     //Check last name
     if(empty($_POST["lastname"])) {
         $lnameErr = "Last name is required.";
@@ -41,7 +42,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $lnameErr = "Only letters, spaces, and apostrophes allowed.";
         }
     }
-    
+
     //Check username
     if(empty($_POST["uname"])) {
         $userErr = "Username is required.";
@@ -66,7 +67,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
-    
+
     //Check email
     if(empty($_POST["email"])) {
         $emailErr = "Email is required.";
@@ -91,7 +92,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
-    
+
     //Check password
     if(empty($_POST["password"])) {
         $passErr = "Password is required.";
@@ -102,8 +103,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $passErr = "Only letters and numbers allowed.";
         }
     }
-    
-    
+
+
     //No errors, go to homepage
     if($fnameErr == "" && $lnameErr == "" && $userErr == "" && $emailErr == "" && $passErr == "") {
         $activationCode = rand(1000, 9999);
@@ -114,12 +115,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $cstmt->bind_param("sssssii", $uname, $pass, $fname, $lname, $email, $zeroVar, $activationCode);
         $cstmt->execute();
         $cstmt->close();
-        
+
         //Send an activation code to the user
         $msg = "Your activation code is: {$activationCode}.";
         mail($email, 'Activation Code', $msg);
-        
-        //Go to Homepage        
+
+        //Go to Homepage
 		$_SESSION["uname"] = $_POST["uname"];
 		header("Location: home.php");
 		//include 'home.html';
@@ -136,62 +137,62 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="global.css">
   </head>
-    
+
   <body>
     <header>
       <h1> Social Network </h1>
     </header>
-      
+
     <br><br>
-    
+
     <div id="loginbox">
     <h2>Create an Account</h2>
         <div id="form">
             <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                 <label>First Name:</label> <input type="text" name="firstname" value="<?php echo $fname;?>">*
-                
+
                 <br>
                 <span class="error"><?php echo $fnameErr;?></span>
                 <br>
-                
+
                 <label>Last Name:</label> <input type="text" name="lastname" value="<?php echo $lname;?>">*
-                
+
                 <br>
                 <span class="error"><?php echo $lnameErr;?></span>
                 <br>
-                
+
                 <label>User Name:</label> <input type="text" name="uname" value="<?php echo $uname;?>">*
-                
+
                 <br>
                 <span class="error"><?php echo $userErr;?></span>
                 <br>
-                
+
                 <label>Email:</label> <input type="text" name="email" value="<?php echo $email;?>">*
-                
+
                 <br>
                 <span class="error"><?php echo $emailErr;?></span>
                 <br>
-                
+
                 <label>Password:</label> <input type="password" name="password" value="<?php echo $pass;?>">*
-                
+
                 <br>
                 <span class="error"><?php echo $passErr;?></span>
                 <br><br>
-                
+
                 <span class="error">* Required Field</span>
                 <br><br>
-                
-                <input type="submit" name="submit" value="Submit"> 
+
+                <input type="submit" name="submit" value="Submit">
             </form>
-            
+
         </div>
         <br><br>
         <a href="login.php"> Login </a>
         <br>
     </div>
-      
+
     <footer>
     </footer>
-    
+
   </body>
 </html>

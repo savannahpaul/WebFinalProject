@@ -37,4 +37,23 @@ function updateLike(){
 	dbreq = new XMLHttpRequest();
 	dbreq.open("GET", "likes.php", true);
 	dbreq.send();
+	alert("updated");
+}
+
+function deletePost(){
+
+	alert("deleted");
+	var id = document.getElementById("like");
+	var postID = id.value;
+
+	xmlhttp=new XMLHttpRequest();
+
+	var PageToSendTo = "deletepost.php?";
+	var MyVariable = postID;
+	var VariablePlaceholder = "id=";
+	var UrlToSend = PageToSendTo + VariablePlaceholder + MyVariable;
+
+	xmlhttp.open("GET", UrlToSend, false);
+	xmlhttp.send();
+
 }
