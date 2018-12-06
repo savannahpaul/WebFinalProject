@@ -1,5 +1,5 @@
 <?php
-$email = $newPass = $oldPass = $backToHome = "";
+$email = $newPass = $oldPass = "";
 $emailErr = $oldPassErr = $newPassErr = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -81,7 +81,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $ustmt->close();
 
             $newPassErr = "<p>Password has been reset for email {$email}</p>";
-            $backToHome = "<p>Go to <a href='home.php'>home page</a></p>";
         }
     }
     
@@ -121,7 +120,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     <br>
                     <span class="error"><?php echo $newPassErr;?></span>
                     
-                    <span><?php echo $backToHome;?></span>
                     <br>
                     
                     <span class="error">* Required Field</span>
