@@ -5,8 +5,14 @@ $uname = $pass = "";
 session_start();
 
 //go back to home if you try to go to login page when youre already logged in
-if($_SESSION["uname"] != ""){
-	header("Location: home.php");
+//if($_SESSION["uname"] != ""){
+//	header("Location: home.php");
+//}
+if(isset($_COOKIE["userCookie"]) && $_COOKIE["userCookie"] == $_SESSION["uname"] && ($_SESSION["lastActive"] < $_SESSION["expire"])) {
+    //Cookie is set, reset timer
+    $_SESSION["lastActive"] = time();
+    setcookie("userCookie", $_SESSION["uname"], $_SESSION["expire"], "/");
+    header("Location: home.php");
 }
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -52,14 +58,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         else {
             //include 'home.html';
 			$_SESSION["uname"] = $_POST["uname"];
+            $_SESSION["expire"] = time() + (60 * 10);
+            setcookie("userCookie", $_SESSION["uname"], $_SESSION["expire"], "/");
+            $_SESSION["lastActive"] = time();
 			//echo $_SESSION["uname"];
 			header("Location: home.php");
             exit;
         }
-
     }
-
-
 }
 
 ?>
@@ -103,6 +109,5 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
   </body>
   <footer>
-    I am an empty footer
   </footer>
 </html>

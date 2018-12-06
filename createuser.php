@@ -122,6 +122,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         //Go to Homepage
 		$_SESSION["uname"] = $_POST["uname"];
+        setcookie("userCookie", $_SESSION["uname"], time() + (60 * 10), "/");
 		header("Location: home.php");
 		//include 'home.html';
         exit;
