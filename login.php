@@ -10,8 +10,7 @@ if($_SESSION["uname"] != ""){
 }
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-    Connect to server
-		Connect to server
+    //Connect to server
 		$servername = "localhost";
 		$dbusername = "qwinter";
 		$dbpassword = "EMGAYIIS";
