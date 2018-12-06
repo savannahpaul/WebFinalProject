@@ -2,6 +2,19 @@
 $email = $newPass = $oldPass = "";
 $emailErr = $oldPassErr = $newPassErr = "";
 
+session_start();
+
+if(isset($_COOKIE["userCookie"]) && ($_COOKIE["userCookie"] == $_SESSION["uname"]) && ($_SESSION["lastActive"] < $_SESSION["expire"])) {
+    //Cookie is set, reset timer
+    $_SESSION["lastActive"] = time();
+    $_SESSION["expire"] = time() + (60* 10);
+    setcookie("userCookie", $_SESSION["uname"], $_SESSION["expire"], "/");
+}
+else {
+    session_destroy();
+    header("Location: logout.php");
+}
+
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     //Connect to server
     $servername = "localhost";

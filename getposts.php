@@ -5,7 +5,15 @@
 	if(isset($_SESSION["uname"]) && $_SESSION["uname"] == ""){
 		exit;
 	}
-
+    if(isset($_COOKIE["userCookie"]) && ($_COOKIE["userCookie"] == $_SESSION["uname"]) && ($_SESSION["lastActive"] < $_SESSION["expire"])) {
+        //Cookie is set, reset timer
+        $_SESSION["lastActive"] = time();
+        $_SESSION["expire"] = time() + (60 * 10);
+        setcookie("userCookie", $_SESSION["uname"], $_SESSION["expire"], "/");
+    }
+    else {
+        exit();
+    }
 	//*****************************************************************************
 	//EDIT THIS WHEN GRADING TO PROPERLY ACCESS YOUR DATABASE
 	//*****************************************************************************
