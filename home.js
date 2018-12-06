@@ -34,15 +34,22 @@ function clic(element){
 }
 
 function updateLike(){
-	dbreq = new XMLHttpRequest();
-	dbreq.open("GET", "likes.php", true);
-	dbreq.send();
-	alert("updated");
+	var id = document.getElementById("like");
+	var postID = id.value;
+
+	xmlhttp=new XMLHttpRequest();
+
+	var PageToSendTo = "likes.php?";
+	var MyVariable = postID;
+	var VariablePlaceholder = "id=";
+	var UrlToSend = PageToSendTo + VariablePlaceholder + MyVariable;
+
+	xmlhttp.open("GET", UrlToSend, false);
+	xmlhttp.send();
+	getPosts();
 }
 
 function deletePost(){
-
-	alert("deleted");
 	var id = document.getElementById("like");
 	var postID = id.value;
 
@@ -55,5 +62,7 @@ function deletePost(){
 
 	xmlhttp.open("GET", UrlToSend, false);
 	xmlhttp.send();
+	getPosts();
 
+	alert("deleted");
 }

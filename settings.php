@@ -14,7 +14,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		die("Cannot connect to database");
 	}
 
-
     if(empty($_POST["email"])) {
         $emailErr = "Email is required.";
     }

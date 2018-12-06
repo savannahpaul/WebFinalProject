@@ -12,9 +12,14 @@
   $dbname = "f18_qwinter";
 
 	$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+	if($conn ->connect_error){
+		die("Cannot connect to database");
+	}
 
-	$updateQuery = $conn->prepare("UPDATE posts SET likes = likes + 1 WHERE username=?");
-  $updateQuery->bind_param('s', $_SESSION["uname"]);
+	$id = $_GET['id'];
+
+	$updateQuery = $conn->prepare("UPDATE posts SET likes = likes + 1 WHERE id=?");
+  $updateQuery->bind_param('i', $id);
   $updateQuery->execute();
   $updateQuery->close();
 

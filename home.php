@@ -15,11 +15,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	  $dbpassword = "EMGAYIIS";
 	  $dbname = "f18_qwinter";
 
-	  // $servername = "localhost";
-	  // $dbusername = "root";
-	  // $dbpassword = "";
-	  // $dbname = "test";
-
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
     if($conn ->connect_error){
 		die("Cannot connect to database");
@@ -74,6 +69,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
       <div id="nav">
         <ul>
           <li><a href="profile.php">My Page</a></li>
+					<li><a href="profile.php">Search Users</a></li>
           <li><a href="activate.php">Activate</a></li>
           <li><a href="settings.php">Settings</a></li>
 		  <li><a href="logout.php">Logout</a></li>
@@ -89,17 +85,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	<div id="postcheck"></div>
 	<div id="postlocation"></div>
 
-	<!-- <div class='post'><div class='postheader'>
-	<span class='poster'>" . $row["username"] . "</span> - " . date("m/d/Y H:i:s", $row["time"]) . " - Post #" . $row["id"] . " - Likes: " . $row["likes"]
-			<button id='like' class='like' onClick='deletePost()' value='".$row["id"]."' style='float:right;'> [Delete] </button>
-		</div>
-		<div class='postcontent'>
-			. $row["content"] . "
-		</div>
-		<div class='postlikes'>
-			<button class='like' onClick='updateLike()' value='" . $row["id"] . "'>&#128077; Like</button>
-		</div>
-	</div> -->
 
     <footer>
 

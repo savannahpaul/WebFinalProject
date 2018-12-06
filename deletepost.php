@@ -11,16 +11,12 @@
   $dbpassword = "EMGAYIIS";
   $dbname = "f18_qwinter";
 
-  // $servername = "localhost";
-  // $dbusername = "root";
-  // $dbpassword = "";
-  // $dbname = "test";
 
 	$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
   $id = $_GET['id'];
 
-	$updateQuery = $conn->prepare("DELETE FROM posts WHERE id=1");
+	$updateQuery = $conn->prepare("DELETE FROM posts WHERE id=?");
   $updateQuery->bind_param('i', $id);
   $updateQuery->execute();
   $updateQuery->close();
