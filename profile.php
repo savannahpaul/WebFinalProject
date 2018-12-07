@@ -87,7 +87,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 ?>
+<!DOCTYPE html>
+<html lang = "en-US">
+  <head>
+    <link rel="stylesheet" type="text/css" href="global.css">
+    <link rel="stylesheet" type="text/css" href="home.css">
+    <meta charset = "UTF-8">
+  </head>
+
+  <body>
+    <header id="hdr">
+      <h1>Social Network</h1>
+    </header>
+      <div id="nav">
+        <ul>
+          <li><a href="home.php">Home</a></li>
+          <li><a href="activate.php">Activate</a></li>
+          <li><a href="settings.php">Settings</a></li>
+		  <li><a href="logout.php">Logout</a></li>
+        </ul>
       </div>
+      <div id="profileDiv">
+        <br>
+      
+      <div style="text-align:center;" id="search">
+      <form method="POST">
+        <input name="name" style="width:80%" type="text" placeholder="Search users...">
+        <input type="submit" value="Submit">
+      </form>
+      </div>
+    </div>
+
+>>>>>>> origin/master
     <footer>
 
     </footer>
