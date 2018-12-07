@@ -109,7 +109,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <a href="resetPassword.php"> Reset Password </a>
     </div>
   </body>
-  
+
     <footer>
+			<img style="padding-left:230px;float:left;height:30px;width:60px;" src="images/css.png" alt="css">
+			<img style="float:left;height:30px;width:60px;" src="images/html5.png" alt="css">
+			<img style="float:left;height:30px;width:60px;" src="images/wcag2AA.png" alt="css">
     </footer>
 </html>

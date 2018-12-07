@@ -17,10 +17,14 @@ else {
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     //Connect to server
+    // $servername = "localhost";
+    // $dbusername = "qwinter";
+    // $dbpassword = "EMGAYIIS";
+    // $dbname = "f18_qwinter";
     $servername = "localhost";
-    $dbusername = "qwinter";
-    $dbpassword = "EMGAYIIS";
-    $dbname = "f18_qwinter";
+    $dbusername = "root";
+    $dbpassword = "";
+    $dbname = "test";
 
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
     if($conn ->connect_error){

@@ -1,3 +1,65 @@
+<?php
+session_start();
+
+if(isset($_SESSION["uname"]) && $_SESSION["uname"] == ""){
+header("Location: login.php");
+}
+
+if(isset($_COOKIE["userCookie"]) && ($_COOKIE["userCookie"] == $_SESSION["uname"]) && ($_SESSION["lastActive"] < $_SESSION["expire"])) {
+  //Cookie is set, reset timer
+  $_SESSION["lastActive"] = time();
+  $_SESSION["expire"] = time() + (60* 10);
+  setcookie("userCookie", $_SESSION["uname"], $_SESSION["expire"], "/");
+}
+else {
+  session_destroy();
+  header("Location: logout.php");
+}
+
+$resultOfQuery = "";
+
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+  //Connect to server
+$servername = "localhost";
+$dbusername = "qwinter";
+$dbpassword = "EMGAYIIS";
+$dbname = "f18_qwinter";
+
+  $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+  if($conn ->connect_error){
+  die("Cannot connect to database");
+}
+
+$name = $_POST["name"];
+//splits the name on spaces
+$names = explode(" ", $name);
+$username = "";
+$bio = "";
+
+$query = "SELECT username, bio FROM users WHERE fname=? AND lname=?";
+$result = $conn->prepare($query);
+$result->bind_param("ss", $names[0], $names[1]);
+$result->execute();
+$result->store_result();
+$result->bind_result($username, $bio);
+if($result->num_rows == 0){
+  $resultOfQuery = "No users matched your search.";
+  //echo "<script type='text/javascript'>alert('No users matched your search');</script>";
+  //exit;
+}
+else{
+  while($row = $result->fetch()){
+    $resultOfQuery = $resultOfQuery . "<div class='post'><div class='postheader'><span class='poster'>" . $username . " - " . $names[0] . " " . $names[1] . "</span></div><div class='postcontent'>" . $bio . "</div>";
+  }
+}
+
+$result->close();
+$conn->close();
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang = "en-US">
   <head>
@@ -19,80 +81,20 @@
 		  <li><a href="logout.php">Logout</a></li>
         </ul>
       </div>
-      
-      <div style="text-align:center;" id="search">
+      <br><br><br><br><br>
+      <div style="text-align:center;margin-left:100px" id="search">
       <form method="POST">
-        <input name="name" style="width:80%" type="text" placeholder="Search users...">
+        <input name="name" style="width:60%" type="text" placeholder="Search users...">
         <input type="submit" value="Submit">
       </form>
       </div>
     </div>
-	<div id="profileDiv">
-        <br>
-	<?php
-session_start();
-
-if(isset($_SESSION["uname"]) && $_SESSION["uname"] == ""){
-	header("Location: login.php");
-}
-
-if(isset($_COOKIE["userCookie"]) && ($_COOKIE["userCookie"] == $_SESSION["uname"]) && ($_SESSION["lastActive"] < $_SESSION["expire"])) {
-    //Cookie is set, reset timer
-    $_SESSION["lastActive"] = time();
-    $_SESSION["expire"] = time() + (60* 10);
-    setcookie("userCookie", $_SESSION["uname"], $_SESSION["expire"], "/");
-}
-else {
-    session_destroy();
-    header("Location: logout.php");
-}
-
-$resultOfQuery = "";
-
-if($_SERVER["REQUEST_METHOD"] == "POST") {
-    //Connect to server
-	$servername = "localhost";
-	$dbusername = "qwinter";
-	$dbpassword = "EMGAYIIS";
-	$dbname = "f18_qwinter";
-
-    $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
-    if($conn ->connect_error){
-		die("Cannot connect to database");
-	}
-
-	$name = $_POST["name"];
-  //splits the name on spaces
-  $names = explode(" ", $name);
-  $username = "";
-  $bio = "";
-
-  $query = "SELECT username, bio FROM users WHERE fname=? AND lname=?";
-  $result = $conn->prepare($query);
-  $result->bind_param("ss", $names[0], $names[1]);
-  $result->execute();
-  $result->store_result();
-  $result->bind_result($username, $bio);
-  if($result->num_rows == 0){
-		$resultOfQuery = "No users matched your search.";
-		//echo "<script type='text/javascript'>alert('No users matched your search');</script>";
-		//exit;
-	}
-	else{
-		while($row = $result->fetch()){
-			$resultOfQuery = $resultOfQuery . "<div class='post'><div class='postheader'><span class='poster'>" . $username . " - " . $names[0] . " " . $names[1] . "</span></div><div class='postcontent'>" . $bio . "</div>";
-		}
-	}
-
-	$result->close();
-	$conn->close();
-	echo $resultOfQuery;
-}
-
-?>
-	</div>
+    <br><br>
+    <div style="margin-left:20px;"><?php echo $resultOfQuery; ?></div>
     <footer>
-
+      <img style="padding-left:230px;float:left;height:30px;width:60px;" src="images/css.png" alt="css">
+      <img style="float:left;height:30px;width:60px;" src="images/html5.png" alt="css">
+      <img style="float:left;height:30px;width:60px;" src="images/wcag2AA.png" alt="css">
     </footer>
     </body>
 </html>

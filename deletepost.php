@@ -20,7 +20,6 @@
   $dbpassword = "EMGAYIIS";
   $dbname = "f18_qwinter";
 
-
 	$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
   $id = $_GET['id'];

@@ -22,6 +22,8 @@
 	$dbusername = "qwinter";
 	$dbpassword = "EMGAYIIS";
 	$dbname = "f18_qwinter";
+
+
 	//*****************************************************************************
 	//EDIT THIS WHEN GRADING TO PROPERLY ACCESS YOUR DATABASE
 	//*****************************************************************************
