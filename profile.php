@@ -14,19 +14,22 @@
         <ul>
           <li><a href="home.php">Home</a></li>
           <li><a href="activate.php">Activate</a></li>
-          <li><a href="settings.php">Settings</a></li>
+          <li><a href="settings.php">Change password</a></li>
+          <li><a href="setbio.php">Change your bio</a></li>
 		  <li><a href="logout.php">Logout</a></li>
         </ul>
       </div>
+      
       <div style="text-align:center;" id="search">
       <form method="POST">
-        <input name="name" style="width:80%" type="text" placeholder="Search users (full name)...">
+        <input name="name" style="width:80%" type="text" placeholder="Search users...">
         <input type="submit" value="Submit">
       </form>
       </div>
-	  <div id="profileDiv">
+    </div>
+	<div id="profileDiv">
         <br>
-		<?php
+	<?php
 session_start();
 
 if(isset($_SESSION["uname"]) && $_SESSION["uname"] == ""){
@@ -87,6 +90,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 ?>
+	</div>
     <footer>
 
     </footer>

@@ -80,10 +80,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     </header>
       <div id="nav">
         <ul>
-          <li><a href="profile.php">My Page</a></li>
-					<li><a href="profile.php">Search Users</a></li>
+          <li><a href="profile.php">Search Users</a></li>
           <li><a href="activate.php">Activate</a></li>
-          <li><a href="settings.php">Change your password</a></li>
+          <li><a href="settings.php">Change password</a></li>
           <li><a href="setbio.php">Change your bio</a></li>
 		  <li><a href="logout.php">Logout</a></li>
         </ul>
