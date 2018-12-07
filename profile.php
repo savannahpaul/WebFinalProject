@@ -1,32 +1,4 @@
-<!DOCTYPE html>
-<html lang = "en-US">
-  <head>
-    <link rel="stylesheet" type="text/css" href="global.css">
-    <link rel="stylesheet" type="text/css" href="home.css">
-    <meta charset = "UTF-8">
-  </head>
-
-  <body>
-    <header id="hdr">
-      <h1>Social Network</h1>
-    </header>
-      <div id="nav">
-        <ul>
-          <li><a href="home.php">Home</a></li>
-          <li><a href="activate.php">Activate</a></li>
-          <li><a href="settings.php">Settings</a></li>
-		  <li><a href="logout.php">Logout</a></li>
-        </ul>
-      </div>
-      <div style="text-align:center;" id="search">
-      <form method="POST">
-        <input name="name" style="width:80%" type="text" placeholder="Search users (full name)...">
-        <input type="submit" value="Submit">
-      </form>
-      </div>
-	  <div id="profileDiv">
-        <br>
-		<?php
+<?php
 session_start();
 
 if(isset($_SESSION["uname"]) && $_SESSION["uname"] == ""){
@@ -87,6 +59,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang = "en-US">
   <head>
@@ -103,7 +76,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <ul>
           <li><a href="home.php">Home</a></li>
           <li><a href="activate.php">Activate</a></li>
-          <li><a href="settings.php">Settings</a></li>
+          <li><a href="settings.php">Change password</a></li>
+          <li><a href="setbio.php">Change your bio</a></li>
 		  <li><a href="logout.php">Logout</a></li>
         </ul>
       </div>
@@ -118,7 +92,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
     </div>
 
->>>>>>> origin/master
     <footer>
 
     </footer>

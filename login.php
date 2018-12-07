@@ -109,6 +109,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <a href="resetPassword.php"> Reset Password </a>
     </div>
   </body>
-  <footer>
-  </footer>
+  
+    <footer>
+    </footer>
 </html>
